@@ -7,7 +7,7 @@ class SongsService {
     this._pool = new Pool();
   }
 
-  async addMusic({
+  async addSong({
     title,
     year,
     performer,
