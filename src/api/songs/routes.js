@@ -1,9 +1,9 @@
 const routes = (handler) => [
   {
     method: 'POST',
-    path: 'songs',
+    path: '/songs',
     handler: handler.postSongHandler,
   },
 ];
 
-module.export = routes;
+module.exports = routes;
