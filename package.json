@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./src/server.js",
-    "migrate": "node-pg-migrate"
+    "migrate": "node-pg-migrate",
+    "lint": "eslint ./src"
   },
   "author": "jordy ferdian",
   "license": "ISC",
