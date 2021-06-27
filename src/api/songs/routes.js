@@ -14,6 +14,11 @@ const routes = (handler) => [
     path: '/songs/{songId}',
     handler: handler.getSongByIdHandler,
   },
+  {
+    method: 'PUT',
+    path: '/songs/{songId}',
+    handler: handler.putSongByIdHandler,
+  },
 ];
 
 module.exports = routes;
