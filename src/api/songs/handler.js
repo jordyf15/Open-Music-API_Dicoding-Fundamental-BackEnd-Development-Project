@@ -46,13 +46,23 @@ class SongsHandler {
   }
 
   async getSongsHandler() {
-    const songs = await this._service.getSongs();
-    return {
-      status: 'success',
-      data: {
-        songs,
-      },
-    };
+    try {
+      const songs = await this._service.getSongs();
+        return {
+          status: 'success',
+          data: {
+            songs,
+          },
+        };
+    } catch (error) {
+      const response = h.response({
+        status: 'error',
+        message: 'Maaf server kami mengalami kegagalan',
+      });
+      response.code(500);
+      console.error(error);
+      return response;
+    }
   }
 
   async getSongByIdHandler(request, h) {
