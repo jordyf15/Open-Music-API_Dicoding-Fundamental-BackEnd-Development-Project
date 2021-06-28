@@ -19,14 +19,4 @@ const mapDBToModel = ({
   updatedAt: updated_at,
 });
 
-const formatSongList = ({
-  id,
-  title,
-  performer,
-}) => ({
-  id,
-  title,
-  performer,
-});
-
-module.exports = { mapDBToModel, formatSongList };
+module.exports = { mapDBToModel };
