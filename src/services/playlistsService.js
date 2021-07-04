@@ -64,7 +64,10 @@ class PlaylistsService {
     };
     // seharusnya tidak perlu diperiksa lagi ada atau tidak karena sudah diperiksa
     // oleh verifyPlaylistOwner
-    await this._pool.query(query);
+    const result = await this._pool.query(query);
+    if (!result.rows.length) {
+      throw new NotFoundError('Maaf, playlist yang anda ingin hapus tidak ditemukan');
+    }
   }
 }
 
