@@ -7,6 +7,7 @@ class PlaylistsHandler {
 
     this.postPlaylistHandler = this.postPlaylistHandler.bind(this);
     this.getPlaylistsHandler = this.getPlaylistsHandler.bind(this);
+    this.deletePlaylistByIdHandler = this.deletePlaylistByIdHandler.bind(this);
   }
 
   async postPlaylistHandler(request, h) {
@@ -55,6 +56,38 @@ class PlaylistsHandler {
         data: {
           playlists,
         },
+      };
+    } catch (error) {
+      if (error instanceof ClientError) {
+        const response = h.response({
+          status: 'fail',
+          message: error.message,
+        });
+        response.code(error.statusCode);
+        return response;
+      }
+
+      const response = h.response({
+        status: 'error',
+        message: 'Maaf server kami mengalami kegagalan',
+      });
+      response.code(500);
+      console.error(error);
+      return response;
+    }
+  }
+
+  async deletePlaylistByIdHandler(request, h) {
+    try {
+      const { playlistId } = request.params;
+      const { userId } = request.auth.credentials;
+
+      await this._service.verifyPlaylistOwner(playlistId, userId);
+      await this._service.deletePlaylistById(playlistId);
+
+      return {
+        status: 'success',
+        message: 'Playlist berhasil dihapus',
       };
     } catch (error) {
       if (error instanceof ClientError) {

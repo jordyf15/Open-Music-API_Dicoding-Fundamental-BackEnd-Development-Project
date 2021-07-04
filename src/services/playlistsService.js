@@ -1,6 +1,8 @@
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
 const InvariantError = require('../exceptions/InvariantError');
+const NotFoundError = require('../exceptions/NotFoundError');
+const AuthorizationError = require('../exceptions/AuthorizationError');
 
 class PlaylistsService {
   constructor() {
@@ -36,6 +38,33 @@ class PlaylistsService {
     const result = await this._pool.query(query);
 
     return result.rows;
+  }
+
+  async verifyPlaylistOwner(id, owner) {
+    const query = {
+      text: 'SELECT * FROM playlists WHERE id = $1',
+      values: [id],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Maaf, Playlist tidak ditemukan');
+    }
+
+    if (result.rows[0].owner !== owner) {
+      throw new AuthorizationError('Maaf, anda tidak berhak menghapus playlist ini');
+    }
+  }
+
+  async deletePlaylistById(id) {
+    const query = {
+      text: 'DELETE FROM playlists WHERE id = $1 RETURNING id',
+      values: [id],
+    };
+    // seharusnya tidak perlu diperiksa lagi ada atau tidak karena sudah diperiksa
+    // oleh verifyPlaylistOwner
+    await this._pool.query(query);
   }
 }
 
