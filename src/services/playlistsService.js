@@ -53,7 +53,7 @@ class PlaylistsService {
     }
 
     if (result.rows[0].owner !== owner) {
-      throw new AuthorizationError('Maaf, anda tidak berhak menghapus playlist ini');
+      throw new AuthorizationError('Maaf, anda tidak berhak mengakses playlist ini');
     }
   }
 
@@ -62,8 +62,7 @@ class PlaylistsService {
       text: 'DELETE FROM playlists WHERE id = $1 RETURNING id',
       values: [id],
     };
-    // seharusnya tidak perlu diperiksa lagi ada atau tidak karena sudah diperiksa
-    // oleh verifyPlaylistOwner
+
     const result = await this._pool.query(query);
     if (!result.rows.length) {
       throw new NotFoundError('Maaf, playlist yang anda ingin hapus tidak ditemukan');
