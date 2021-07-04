@@ -92,7 +92,7 @@ class SongsService {
     const result = await this._pool.query(query);
 
     if (!result.rows.length) {
-      throw new NotFoundError('Lagu dengan id tersebut tidak ditemukan');
+      throw new InvariantError('Id lagu tersebut tidak valid');
     }
   }
 }
