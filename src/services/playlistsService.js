@@ -23,6 +23,20 @@ class PlaylistsService {
 
     return result.rows[0].id;
   }
+
+  async getPlaylists(owner) {
+    const query = {
+      text: `SELECT playlists.id, playlists.name, users.username
+      FROM playlists
+      INNER JOIN users ON playlists.owner = users.id
+      WHERE playlists.owner = $1`,
+      values: [owner],
+    };
+
+    const result = await this._pool.query(query);
+
+    return result.rows;
+  }
 }
 
 module.exports = PlaylistsService;

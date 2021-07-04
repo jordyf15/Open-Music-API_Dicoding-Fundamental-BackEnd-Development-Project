@@ -6,6 +6,7 @@ class PlaylistsHandler {
     this._validator = validator;
 
     this.postPlaylistHandler = this.postPlaylistHandler.bind(this);
+    this.getPlaylistsHandler = this.getPlaylistsHandler.bind(this);
   }
 
   async postPlaylistHandler(request, h) {
@@ -25,6 +26,36 @@ class PlaylistsHandler {
       });
       response.code(201);
       return response;
+    } catch (error) {
+      if (error instanceof ClientError) {
+        const response = h.response({
+          status: 'fail',
+          message: error.message,
+        });
+        response.code(error.statusCode);
+        return response;
+      }
+
+      const response = h.response({
+        status: 'error',
+        message: 'Maaf server kami mengalami kegagalan',
+      });
+      response.code(500);
+      console.error(error);
+      return response;
+    }
+  }
+
+  async getPlaylistsHandler(request, h) {
+    try {
+      const { userId } = request.auth.credentials;
+      const playlists = await this._service.getPlaylists(userId);
+      return {
+        status: 'success',
+        data: {
+          playlists,
+        },
+      };
     } catch (error) {
       if (error instanceof ClientError) {
         const response = h.response({
