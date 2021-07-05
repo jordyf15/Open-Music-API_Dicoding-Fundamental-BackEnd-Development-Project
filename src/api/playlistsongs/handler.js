@@ -22,7 +22,7 @@ class PlaylistSongsHandler {
       const { playlistId } = request.params;
       const { userId } = request.auth.credentials;
 
-      await this._playlistsService.verifyPlaylistOwner(playlistId, userId);
+      await this._playlistsService.verifyPlaylistAccess(playlistId, userId);
       await this._songsService.verifyValidSong(songId);
       await this._playlistSongsService.addSongToPlaylist({ playlistId, songId });
 
@@ -56,7 +56,7 @@ class PlaylistSongsHandler {
       const { userId } = request.auth.credentials;
       const { playlistId } = request.params;
 
-      await this._playlistsService.verifyPlaylistOwner(playlistId, userId);
+      await this._playlistsService.verifyPlaylistAccess(playlistId, userId);
       const songs = await this._playlistSongsService.getSongsOfPlaylist(playlistId);
 
       return {
@@ -92,7 +92,7 @@ class PlaylistSongsHandler {
       const { userId } = request.auth.credentials;
       const { playlistId } = request.params;
 
-      await this._playlistsService.verifyPlaylistOwner(playlistId, userId);
+      await this._playlistsService.verifyPlaylistAccess(playlistId, userId);
       await this._songsService.verifyValidSong(songId);
       await this._playlistSongsService.deleteSongOfPlaylist(playlistId, songId);
 
