@@ -4,28 +4,28 @@ const Hapi = require('@hapi/hapi');
 const Jwt = require('@hapi/jwt');
 
 const songs = require('./api/songs');
-const SongsService = require('./services/songsService');
+const SongsService = require('./services/postgres/songsService');
 const SongsValidator = require('./validator/songs');
 
 const users = require('./api/users');
-const UsersService = require('./services/usersService');
+const UsersService = require('./services/postgres/usersService');
 const UsersValidator = require('./validator/users');
 
 const authentications = require('./api/authentications');
-const AuthenticationsService = require('./services/authenticationsService');
+const AuthenticationsService = require('./services/postgres/authenticationsService');
 const AuthenticationsValidator = require('./validator/authentications');
 const TokenManager = require('./tokenize/TokenManager');
 
 const playlists = require('./api/playlists');
-const PlaylistsService = require('./services/playlistsService');
+const PlaylistsService = require('./services/postgres/playlistsService');
 const PlaylistsValidator = require('./validator/playlists');
 
 const playlistSongs = require('./api/playlistsongs');
-const PlaylistSongsService = require('./services/playlistsongsService');
+const PlaylistSongsService = require('./services/postgres/playlistsongsService');
 const PlaylistSongsValidator = require('./validator/playlistsongs');
 
 const collaborations = require('./api/collaborations');
-const CollaborationsService = require('./services/collaborationsService');
+const CollaborationsService = require('./services/postgres/collaborationsService');
 const CollaborationsValidator = require('./validator/collaborations');
 
 const init = async () => {
