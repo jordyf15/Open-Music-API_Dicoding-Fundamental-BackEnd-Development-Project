@@ -17,10 +17,11 @@ class PlaylistSongsService {
     };
 
     const result = await this._pool.query(query);
-    await this._cacheService.delete(`playlistsongs:${playlistId}`);
+
     if (!result.rows[0].id) {
       throw new InvariantError('Gagal menambahkan lagu ke playlist');
     }
+    await this._cacheService.delete(`playlistsongs:${playlistId}`);
   }
 
   async getSongsOfPlaylist(playlistId) {
@@ -50,10 +51,11 @@ class PlaylistSongsService {
     };
 
     const result = await this._pool.query(query);
-    await this._cacheService.delete(`playlistsongs:${playlistId}`);
+
     if (!result.rows.length) {
       throw new InvariantError('Lagu pada playlist gagal dihapus');
     }
+    await this._cacheService.delete(`playlistsongs:${playlistId}`);
   }
 }
 
