@@ -38,6 +38,8 @@ const uploads = require('./api/uploads');
 const StorageService = require('./services/storage/StorageService');
 const UploadsValidator = require('./validator/uploads');
 
+const CacheService = require('./services/redis/CacheService');
+
 const init = async () => {
   const server = Hapi.server({
     port: process.env.PORT,
@@ -49,12 +51,13 @@ const init = async () => {
     },
   });
 
+  const cacheService = new CacheService();
   const songsService = new SongsService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
   const collaborationsService = new CollaborationsService();
   const playlistsService = new PlaylistsService(collaborationsService);
-  const playlistSongsService = new PlaylistSongsService();
+  const playlistSongsService = new PlaylistSongsService(cacheService);
   const storageService = new StorageService(path.resolve(__dirname, 'api/uploads/file/pictures'));
 
   await server.register([
