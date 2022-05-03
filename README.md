@@ -26,6 +26,12 @@ Notes:
 - As for the feature of exporting songs in a playlist and have it send to the email is done by another application that is communicated with using message broker with rabbitMQ.
 - This project is made in order to pass Dicoding's Fundamental BackEnd Development Course.
 
+## Live Demo
+https://jordy-open-music-api.herokuapp.com/
+  
+Note:  
+This is just the base url for the api deployed at heroku. As for the front end application, it will be developed in the future.
+
 ## SETUP
 ### Installation
     git clone https://github.com/jordyf15/Open-Music-API_Dicoding-Fundamental-BackEnd-Development-Project.git
