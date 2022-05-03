@@ -43,13 +43,16 @@ These variables need to be prepared in a `.env` file in the root folder.
 - PGUSER: Name of the user for the database in your  postgres.
 - PGPASSWORD: Password for the user used to access the database in your postgres.
 - PGHOST: The host for the postgres.
+- PGPORT: The port for the postgres database.
 - PORT: The port of the server.
 - HOST: The host of the server.
 - ACCESS_TOKEN_KEY: The key that will be used to make the access token for authentication in Open Music
 - REFRESH_TOKEN_KEY: The key that will be used to make the refresh token to refresh expired access token in Open Music.
 - ACCESS_TOKEN_AGE: The age of access token before they expired in seconds.
 - RABBITMQ_SERVER: The host server of rabbitmq.
-- REDIS_SERVER: The host server of redis.
+- REDIS_HOST: The host server of redis.
+- REDIS_PORT: The port for redis server.
+- REDIS_PASSWORD: The password for redis server.
 
 ## Information about the course
 There are 3 submission in the course that have their own requirements which have already been fulfilled by the Open Music API.  
